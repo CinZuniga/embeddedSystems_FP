@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 import json
 
@@ -46,6 +46,11 @@ def data_append():
         if not dist:
             return jsonify({"error": "Missing distance parameter"}), 400
         
+        try:
+            dist = float(dist)
+        except ValueError:
+            return jsonify({"error": "Invalid distance value"}), 400
+
         with open('data.txt', 'a') as f:
             f.write(f"{dt},{dist}\n")
         
