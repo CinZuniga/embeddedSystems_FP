@@ -1,48 +1,64 @@
-import datetime
-from flask import Flask
-from flask import render_template
-from flask import request
+from flask import Flask, render_template, request, redirect, url_for
+from datetime import datetime
+import json
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return render_template('index.html')
+@app.route('/')
+def landing_page():
+    return render_template('landing.html')
 
-@app.route("/health")
-def health():
-   
-    return "<p>Server is up and running.</p>"
+@app.route('/set_name', methods=['GET', 'POST'])
+def set_name():
+    if request.method == 'POST':
+        name = request.form['name']
+        return redirect(url_for('monitor', person=name))
+    return render_template('set_name.html')
 
 @app.route("/monitor")
 def monitor():
-
-    # calculate some metrics here
+    person = request.args.get('person', "Cinthya")  # Default name is Cinthya
     data = []
 
-    with open('data.txt', 'r') as f:
-        for line in f:
-            parts = line.strip().split(',')
-            if len(parts) == 2:
-                datetime, temperature = parts
-                data.append({'datetime': datetime, 'temperature': float(temperature)})
+    try:
+        with open('data.txt', 'r') as f:
+            for line in f:
+                parts = line.strip().split(',')
+                if len(parts) == 2:
+                    dt, distance = parts
+                    data.append({
+                        'datetime': dt,
+                        'distance': float(distance)
+                    })
+    except FileNotFoundError:
+        data = []
 
-    person = "Pepe"
-   
+    # Limit to last 10 entries
+    data = data[-10:]
     return render_template('monitor.html', data=data, person=person)
 
 @app.route("/data/append")
 def data_append():
-
-    dt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    temp = request.args.get('temp')
-    if not dt:
-        return "<p>Error: Missing parameters</p>", 400
+    try:
+        dt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        dist = request.args.get('dist')
+        
+        if not dist:
+            return jsonify({"error": "Missing distance parameter"}), 400
+        
+        with open('data.txt', 'a') as f:
+            f.write(f"{dt},{dist}\n")
+        
+        return jsonify({"message": "Data appended successfully",
+                       "datetime": dt,
+                       "distance": dist})
     
-    # Here you would typically append the data to a database or a file
-    print(f"Appending data: datetime={dt}, temp={temp}")
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    with open('data.txt', 'a') as f:
-        f.write(f"{dt},{temp}\n")
+@app.route("/about")
+def about_page():
+    return render_template('about.html')
 
-    return "<p>Data appended successfully.</p>"
+if __name__ == '__main__':
+    app.run(debug=True)
