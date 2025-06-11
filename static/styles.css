@@ -1,0 +1,277 @@
+:root {
+    --ig-background: #ffe4e1;
+    --ig-primary: #262626;
+    --ig-border: #dbdbdb;
+    --ig-blue: #0095f6;
+    --button-color: #ff69b4;
+}
+
+body {
+    background-color: var(--ig-background);
+    font-family: monospace;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background-color: #e5bad7; /* Light pink */
+    padding: 10px 0;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.content {
+    display: flex;
+    margin-top: 20px;
+}
+
+.sidebar {
+    width: 25%;
+    padding: 10px;
+}
+
+.main-content {
+    width: 75%;
+    padding: 10px;
+}
+
+.post {
+    background-color: f3addc;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+    background-color: #f3addc;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #f3addc;
+}
+
+.input-field {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+body {
+    background-color: #f3addc;
+}
+
+.fb-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.fb-left {
+    flex: 1;
+    max-width: 500px;
+    margin-right: 60px;
+}
+
+.fb-logo {
+    color: #f218e0;
+    font-size: 60px;
+    font-weight: bold;
+    letter-spacing: -3px;
+    margin-bottom: 10px;
+}
+
+.fb-desc {
+    font-size: 28px;
+    color: #1c1e21;
+    margin-bottom: 30px;
+}
+
+.fb-right {
+    background: #fff;
+    padding: 30px 24px 20px 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.fb-btn {
+    background-color: #d88fce;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 0;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    text-align: center;
+}
+
+.fb-btn:hover {
+    background-color: #f182bf;
+}
+
+.monitor-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid var(--ig-border);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.monitor-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--ig-border);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.temperature-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    color: #262626;
+}
+
+.fb-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+.fb-table th,
+.fb-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--ig-border);
+}
+
+.fb-table th {
+    font-weight: bold;
+}
+
+.chart-container {
+    margin-top: 24px;
+    padding: 16px;
+    border: 1px solid var(--ig-border);
+    border-radius: 8px;
+    background: white;
+}
+
+/* Landing page styles */
+.login-container {
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+}
+
+.login-button {
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #ff1493;
+}
+
+/* About page styles */
+.about-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid var(--ig-border);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.about-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.about-container p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* Monitor page styles */
+.monitor-container button {
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.monitor-container button:hover {
+    background-color: #ff1493;
+}
+
+@media (max-width: 900px) {
+    .fb-container {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 40px;
+    }
+
+    .fb-left {
+        margin-right: 0;
+        margin-bottom: 40px;
+        max-width: 100%;
+    }
+}

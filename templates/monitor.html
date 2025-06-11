@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distance Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="monitor-container">
+        {% if person %}
+        <div class="user-info">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background-color: #dbdbdb;"></div>
+            <span style="margin-left: 12px; font-weight: 600;">{{ person }}</span>
+        </div>
+        {% endif %}
+
+        <div class="monitor-title">
+            <span role="img" aria-label="distance">📏</span>
+            <span>Distance Monitor</span>
+        </div>
+
+        <table class="fb-table">
+            <thead>
+                <tr>
+                    <th>Date & Time</th>
+                    <th>Distance (cm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if data %}
+                <tr>
+                    <td colspan="2" style="text-align: center; font-style: italic;">Last 10 entries</td>
+                </tr>
+                {% for entry in data %}
+                <tr>
+                    <td>{{ entry.datetime }}</td>
+                    <td>{{ entry.distance }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="2" style="text-align: center; font-style: italic;">No data available</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <div class="chart-container">
+            <canvas id="distChart"></canvas>
+        </div>
+        <button onclick="location.reload()">Refresh Data</button>
+        <a href="{{ url_for('landing_page') }}">Back to Home</a>
+    </div>
+
+    <script>
+        // Parse the JSON data from Flask
+        const data = {{ data|safe }};
+
+        // Extract labels and distances
+        const labels = data ? data.map(entry => entry.datetime) : [];
+        const dist = data ? data.map(entry => entry.distance) : [];
+
+        const ctx = document.getElementById('distChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Distance (cm)',
+                    data: dist,
+                    fill: false,
+                    borderColor: '#ff69b4', /* Darker pink for the line */
+                    backgroundColor: '#ff69b4', /* Darker pink for the fill */
+                    tension: 0.1,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#ff69b4',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

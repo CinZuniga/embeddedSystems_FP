@@ -1,0 +1,36 @@
+.monitor-container {
+max-width: 900px;
+margin: 40px auto;
+background: #fff;
+border-radius: 8px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+padding: 32px;
+}
+.monitor-title {
+font-size: 28px;
+color: #f218e0;
+font-weight: bold;
+margin-bottom: 24px;
+}
+.fb-table {
+width: 100%;
+border-collapse: collapse;
+margin-bottom: 32px;
+}
+.fb-table th, .fb-table td {
+padding: 12px 10px;
+border-bottom: 1px solid #f0f2f5;
+text-align: left;
+}
+.fb-table th {
+background: #f0f2f5;
+color: #f218ce;
+font-weight: bold;
+}
+.fb-table tr:last-child td {
+border-bottom: none;
+}
+.chart-container {
+width: 100%;
+height: 350px;
+}
