@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from datetime import datetime
 import json
 
@@ -11,8 +11,13 @@ def landing_page():
 @app.route('/set_name', methods=['GET', 'POST'])
 def set_name():
     if request.method == 'POST':
-        name = request.form['name']
-        return redirect(url_for('monitor', person=name))
+        try:
+            name = request.form['name']
+            print(f"Name received: {name}")  # Debugging line
+            return redirect(url_for('monitor', person=name))
+        except Exception as e:
+            print(f"Error in set_name: {e}")
+            return "An error occurred in set_name", 500
     return render_template('set_name.html')
 
 @app.route("/monitor")

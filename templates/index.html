@@ -1,26 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram – log in or sign up</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
+app = Flask(__name__)
 
-<body>
-    <div class="fb-container">
-        <div class="fb-left">
-            <div class="fb-logo">Embedded systems 2025</div>
-            <div class="fb-desc">
-                Connect with friends and the world around you on Instagram.
-            </div>
-        </div>
-        <div class="fb-right">
-            <a href="/about" class="fb-btn">About Us</a>
-            <a href="/monitor" class="fb-btn">Monitor</a>
-        </div>
-    </div>
-</body>
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-</html>
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/monitor')
+def monitor():
+    return render_template('monitor.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
