@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Distance Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="monitor-container">
+        <h1>Add Distance Data</h1>
+        <form method="get" action="{{ url_for('data_append') }}">
+            <label for="dist">Distance (cm):</label>
+            <input type="number" step="any" id="dist" name="dist" required>
+            <button type="submit">Submit</button>
+        </form>
+        <br>
+        <a href="{{ url_for('monitor') }}" class="login-button">Back to Monitor</a>
+        <a href="{{ url_for('landing_page') }}" class="login-button">Back to Home</a>
+    </div>
+</body>
+</html>

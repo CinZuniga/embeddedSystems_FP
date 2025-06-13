@@ -42,33 +42,26 @@ def monitor():
     data = data[-10:]
     return render_template('monitor.html', data=data, person=person)
 
-@app.route("/data/append")
+@app.route("/data/append", methods=['GET'])
 def data_append():
+    dist = request.args.get('dist')
+    if dist is None:
+        # Show the form if no distance is provided
+        return render_template('data_append.html')
     try:
         dt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        dist = request.args.get('dist')
-        
-        if not dist:
-            return jsonify({"error": "Missing distance parameter"}), 400
-        
-        try:
-            dist = float(dist)
-        except ValueError:
-            return jsonify({"error": "Invalid distance value"}), 400
-
+        dist_val = float(dist)
         with open('data.txt', 'a') as f:
-            f.write(f"{dt},{dist}\n")
-        
-        return jsonify({"message": "Data appended successfully",
-                       "datetime": dt,
-                       "distance": dist})
-    
+            f.write(f"{dt},{dist_val}\n")
+        return render_template('data_append.html', message="Data appended successfully!")
+    except ValueError:
+        return render_template('data_append.html', message="Invalid distance value!")
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return render_template('data_append.html', message=f"Error: {e}")
 
 @app.route("/about")
 def about_page():
     return render_template('about.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
