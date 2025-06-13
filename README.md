@@ -4,7 +4,7 @@
 
 
 ```
-sudo apt instal python3 python3-pip python3/nenv
+sudo apt install python3 python3-pip python3/nenv
 ```
 
 
@@ -14,13 +14,8 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-# Install requirements 
 
-```requirements.txt
-flask
-```
-
-install requirements:
+# Install requirements:
 
 ```
 pip3 install -r requirements.txt
@@ -29,5 +24,5 @@ pip3 install -r requirements.txt
 # Run the website
 
 ```
-flask --app main run
+flask --app main run --host 0.0.0.0
 ```
